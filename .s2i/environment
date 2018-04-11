@@ -8,3 +8,6 @@ JAVA_APP_JAR=spongevanilla-1.12.2-7.1.0-BETA-33.jar
 # causing: java.lang.NoClassDefFoundError: net/minecraft/launchwrapper/Launch
 AB_JOLOKIA_OFF=true
 AB_PROMETHEUS_OFF=true
+
+# TODO why does run-java.sh not add these?  https://github.com/fabric8io-images/s2i/issues/138
+JAVA_OPTIONS=-XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
