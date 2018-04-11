@@ -1,0 +1,8 @@
+#!/bin/sh
+set -ex
+
+cd /deployments/
+
+# TODO export OPTS="$(run-java.sh options --memory)"
+
+java -jar spongevanilla-*.jar
