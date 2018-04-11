@@ -1,11 +1,16 @@
 #!/bin/sh
 set -ex
 
+# NB: curl'd files are cp'd not mv'd so that s2i --incremental works!
+
 MINECRAFT_VERSION=1.12.2
 SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
 
+mkdir -p /tmp/artifacts/m2
+cd /tmp/artifacts/m2
+
 curl -O -J https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
-mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
+cp spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
 
 curl -O -J https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar
-mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
+cp minecraft_server.$MINECRAFT_VERSION.jar /deployments/
