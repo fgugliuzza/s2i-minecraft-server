@@ -11,3 +11,7 @@ curl -O -J https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSI
 mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
 
 echo "eula=true" > /deployments/eula.txt
+
+# By doing this once during the build already, we save time on the first start at run-time
+cd /deployments/
+java -jar spongevanilla-*.jar <<< "stop"
