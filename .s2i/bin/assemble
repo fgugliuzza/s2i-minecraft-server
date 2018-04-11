@@ -4,14 +4,17 @@ set -ex
 MINECRAFT_VERSION=1.12.2
 SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
 
-curl -O -J https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
-mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
+cd /deployments/
 
-curl -O -J https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar
-mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
+if [[ ! -e *.jar ]]; then
+  curl -O -J https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
+else
+  echo "Not re-downloading Sponge JAR in incremental S2I build"
+fi
 
-echo "eula=true" > /deployments/eula.txt
+# curl -O -J -z https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar
+
+echo "eula=true" > eula.txt
 
 # By doing this once during the build already, we save time on the first start at run-time
-cd /deployments/
 java -jar spongevanilla-*.jar <<< "stop"
