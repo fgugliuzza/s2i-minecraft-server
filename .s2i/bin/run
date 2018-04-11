@@ -1,6 +1,0 @@
-#!/bin/sh
-set -ex
-
-cd /deployments/
-
-/opt/run-java/run-java.sh

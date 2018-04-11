@@ -4,3 +4,7 @@ JAVA_APP_DIR=/deployments/
 # JAVA_APP_JAR=spongevanilla*.jar
 JAVA_APP_JAR=spongevanilla-1.12.2-7.1.0-BETA-33.jar
 
+# The Jolokia and Prometheus JVM agents seem to interfere with Minecraft start-up
+# causing: java.lang.NoClassDefFoundError: net/minecraft/launchwrapper/Launch
+AB_JOLOKIA_OFF=true
+AB_PROMETHEUS_OFF=true
