@@ -10,6 +10,14 @@ Create a project named e.g. `test` on the web console (NOT using `oc new-project
 
     oc logs -f bc/s2i-minecraft-server
 
+    oc get pods | grep -v build
+
+    oc port-forward s2i-minecraft-server-.... 25565:25565
+
+If you have `git clone https://github.com/vorburger/s2i-minecraft-server.git` locally, then you can:
+
+    oc start-build s2i-minecraft-server --from-dir=. --follow
+
 ## Locally
 
 Build it [using S2I](https://github.com/openshift/source-to-image):
@@ -23,6 +31,7 @@ Run it with:
 Debug it with:
 
     docker run -it s2i-minecraft-server /bin/bash
+
 
 ## What else?
 
