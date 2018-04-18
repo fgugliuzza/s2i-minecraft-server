@@ -15,3 +15,6 @@ echo "eula=true" > /deployments/eula.txt
 # By doing this once during the build already, we save time on the first start at run-time
 cd /deployments/
 java -jar spongevanilla-*.jar <<< "stop"
+
+# https://github.com/vorburger/s2i-minecraft-server/issues/2
+find /deployments/ -exec chmod a+rw {} \;
