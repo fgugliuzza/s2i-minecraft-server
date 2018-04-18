@@ -26,7 +26,7 @@ Build it [using S2I](https://github.com/openshift/source-to-image):
 
 Run it with:
 
-    docker run -p 25566:25565 s2i-minecraft-server
+    docker run -p 25565:25565 s2i-minecraft-server
 
 Debug it with:
 
