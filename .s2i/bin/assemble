@@ -1,8 +1,13 @@
 #!/bin/sh
 set -ex
 
+# Just a reminder that we're not running as "root" but (probably) as "jboss"
+id
+
+# Copy server.properties & Co.
 find /tmp/src/src/ -type f -exec cp -v {} /deployments \;
 
+# Download Minecraft & Sponge JARs
 MINECRAFT_VERSION=1.12.2
 SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
 
@@ -14,9 +19,9 @@ mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
 
 echo "eula=true" > /deployments/eula.txt
 
-# By doing this once during the build already, we save time on the first start at run-time
+# By doing this once during the build already, we save some time on the first start at run-time
 cd /deployments/
-java -jar spongevanilla-*.jar <<< "stop"
+java -jar spongevanilla-*.jar --universe /deployments/universe/ <<< "stop"
 
 # https://github.com/vorburger/s2i-minecraft-server/issues/2
 find /deployments/ -exec chmod a+rw {} \;

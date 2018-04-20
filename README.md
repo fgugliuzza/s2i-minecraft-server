@@ -18,19 +18,33 @@ If you have `git clone https://github.com/vorburger/s2i-minecraft-server.git` lo
 
     oc start-build s2i-minecraft-server --from-dir=. --follow
 
+
 ## Locally
 
 Build it [using S2I](https://github.com/openshift/source-to-image):
 
     s2i build --copy . fabric8/s2i-java s2i-minecraft-server
 
-Run it with:
+Run it with with an ephemeral world for a first quick test:
 
-    docker run -p 25565:25565 s2i-minecraft-server
+    docker run --rm -p 25565:25565 s2i-minecraft-server
+
+or with a persistent world on a volume (NB -v not --mount, even for volumes):
+
+    docker volume create test-universe
+    docker run --rm -p 25565:25565 -v test-universe:/deployments/universe s2i-minecraft-server
+
+    docker volume inspect test-universe
+    docker volume ls
+    docker volume rm ...
+    docker volume prune
+
+NB: Using -v with a direct absolute path to a local host directory
+is NOK and leads to: java.nio.file.AccessDeniedException: /deployments/universe/world.
 
 Debug it with:
 
-    docker run -it s2i-minecraft-server /bin/bash
+    docker run --rm -it s2i-minecraft-server /bin/bash
 
 
 ## What else?
