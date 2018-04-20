@@ -1,6 +1,8 @@
 #!/bin/sh
 set -ex
 
+find /tmp/src/src/ -type f -exec cp -v {} /deployments \;
+
 MINECRAFT_VERSION=1.12.2
 SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
 
