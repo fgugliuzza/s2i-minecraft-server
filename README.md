@@ -23,6 +23,14 @@ Use the UI to Add Storage (PV) for /deployments/universe to the Deployment (Appl
 but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
 to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
 
+To expose the Minecraft server port, Edit YAML, replace `type: ClusterIP` by `LoadBalancer`, and this to ports:
+
+    - name: minecraft
+      port: 25565
+
+This will only work if your OpenShift supports external non-HTTP traffic.
+
+
 ### Troubleshooting
 
 If the Builds > ... > Events (not Builds > ... > #N > Events!) shows
