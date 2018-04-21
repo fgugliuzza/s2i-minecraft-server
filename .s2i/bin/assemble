@@ -17,11 +17,17 @@ mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
 curl -O -J https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar
 mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
 
-echo "eula=true" > /deployments/eula.txt
+cd /deployments/
+
+echo "eula=true" > eula.txt
 
 # By doing this once during the build already, we save some time on the first start at run-time
-cd /deployments/
-java -jar spongevanilla-*.jar --universe /deployments/universe/ <<< "stop"
+# but on "real world" (non Minishift) envs like OpenShift Online Free Starter or appuio.ch
+# this typically causes the S2I build to get OOM Killed.  Ultimately it will need the same
+# RAM when running the real server after the build, but while it's easy to increase the
+# Resource Limit of a Deployment, I have not yet figured out how to easily to that for
+# a BuildConfig, so we keep this commented out, for now.  TODO Figure out & uncomment!
+## java -jar spongevanilla-*.jar --universe /deployments/universe/ <<< "stop"
 
 # https://github.com/vorburger/s2i-minecraft-server/issues/2
 find /deployments/ -exec chmod a+rw {} \;
