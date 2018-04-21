@@ -23,6 +23,17 @@ Use the UI to Add Storage (PV) for /deployments/universe to the Deployment (Appl
 but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
 to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
 
+### Troubleshooting
+
+If the Builds > ... > Events (not Builds > ... > #N > Events!) shows
+"error instantiating Build from BuildConfig ... (0): Error resolving ImageStreamTag s2i-java:latest in namespace minecraft: unable to find latest tagged image"
+then you can try if first doing this helps:
+
+    oc new-build https://github.com/fabric8io-images/s2i.git --context-dir=java/images/jboss
+
+If this also fails with "error: buildconfigs.build.openshift.io "s2i" is forbidden: build strategy Docker is not allowed"
+then you cannot use that OpenShift instance.
+
 
 ## Locally
 
