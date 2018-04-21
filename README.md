@@ -18,6 +18,11 @@ If you have `git clone https://github.com/vorburger/s2i-minecraft-server.git` lo
 
     oc start-build s2i-minecraft-server --from-dir=. --follow
 
+Use the UI to Add Storage (PV) for /deployments/universe to the Deployment (Application).
+[There is no CLI yet to add a PVC](https://github.com/kubernetes/kubernetes/pull/52006),
+but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
+to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
+
 
 ## Locally
 
