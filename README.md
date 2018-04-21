@@ -28,6 +28,8 @@ To expose the Minecraft server port, Edit YAML, replace `type: ClusterIP` by `Lo
     - name: minecraft
       port: 25565
 
+You'll most probably also want to remove the 8778 and 9779 ports it exposed by default (from the s2i-java Dockerfile).
+
 This will only work if your OpenShift supports external non-HTTP traffic.
 
 
