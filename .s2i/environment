@@ -11,6 +11,13 @@ JAVA_ARGS=--universe /deployments/universe
 AB_JOLOKIA_OFF=true
 AB_PROMETHEUS_OFF=true
 
-JAVA_OPTIONS=-XX:+HeapDumpOnOutOfMemoryError
+# default 50 leads to OutOfMemoryError for -Xmx256m in 512 MiB container, bump it to 90, fine (at 512)
+# set the JAVA_INIT_MEM_RATIO to the same as the JAVA_MAX_MEM_RATIO for testing if sufficient, not prod
+# JAVA_INIT_MEM_RATIO=90
+JAVA_MAX_MEM_RATIO=90
+
+# HeapDumpOnOutOfMemoryError only really makes sense if we somehow can get it to write to /deployments/universe
+# JAVA_OPTIONS=-XX:+HeapDumpOnOutOfMemoryError
+
 # according to https://github.com/fabric8io-images/s2i/issues/138, the usual UseCGroupMemoryLimitForHeap is not needed with run-java:
 # JAVA_OPTIONS=-XX:+HeapDumpOnOutOfMemoryError -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
