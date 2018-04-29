@@ -18,7 +18,7 @@ If you have `git clone https://github.com/vorburger/s2i-minecraft-server.git` lo
 
     oc start-build s2i-minecraft-server --from-dir=. --follow
 
-Use the UI to Add Storage (PV) for /deployments/universe to the Deployment (Application).
+Use the UI to Add Storage (PV) for /deployments/persistent/universe to the Deployment (Application).
 [There is no CLI yet to add a PVC](https://github.com/kubernetes/kubernetes/pull/52006),
 but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
 to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
@@ -58,7 +58,7 @@ Run it with with an ephemeral world for a first quick test:
 or with a persistent world on a volume (NB -v not --mount, even for volumes):
 
     docker volume create test-universe
-    docker run --rm -p 25565:25565 -v test-universe:/deployments/universe s2i-minecraft-server
+    docker run --rm -p 25565:25565 -v test-universe:/deployments/persistent/universe s2i-minecraft-server
 
     docker volume inspect test-universe
     docker volume ls
@@ -66,7 +66,7 @@ or with a persistent world on a volume (NB -v not --mount, even for volumes):
     docker volume prune
 
 NB: Using -v with a direct absolute path to a local host directory
-is NOK and leads to: java.nio.file.AccessDeniedException: /deployments/universe/world.
+is NOK and leads to: java.nio.file.AccessDeniedException: /deployments/persistent/universe/world.
 
 Debug it with:
 
