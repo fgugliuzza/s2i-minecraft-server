@@ -1,6 +1,6 @@
 # Minecraft Server Docker OpenShift Container via Source to Image (S2I)
 
-## OpenShift
+## OpenShift (incl. minishift)
 
 Create a project named e.g. `test` on the web console (NOT using `oc new-project test`), and:
 
@@ -23,7 +23,7 @@ Use the UI to Add Storage (PV) for /deployments/persistent/universe to the Deplo
 but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
 to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
 
-To expose the Minecraft server port, Edit YAML, replace `type: ClusterIP` by `LoadBalancer`, and this to ports:
+To expose the Minecraft server port, Edit YAML of the Service, replace `type: ClusterIP` by `LoadBalancer`, and this to ports:
 
     - name: minecraft
       port: 25565
@@ -31,6 +31,9 @@ To expose the Minecraft server port, Edit YAML, replace `type: ClusterIP` by `Lo
 You'll most probably also want to remove the 8778 and 9779 ports it exposed by default (from the s2i-java Dockerfile).
 
 This will only work if your OpenShift supports external non-HTTP traffic.
+
+For minishift, in addition to above, you need to note the `nodePort` given to `targetPort`/`port: 25565`
+shown to `oc export svc s2i-minecraft-server`, and the IP shown by `minishift ip` and connect to that from the Minecraft client.
 
 
 ### Troubleshooting
@@ -45,7 +48,7 @@ If this also fails with "error: buildconfigs.build.openshift.io "s2i" is forbidd
 then you cannot use that OpenShift instance.
 
 
-## Locally
+## Locally with Docker
 
 Build it [using S2I](https://github.com/openshift/source-to-image):
 
