@@ -29,5 +29,8 @@ echo "eula=true" > eula.txt
 # a BuildConfig, so we keep this commented out, for now.  TODO Figure out & uncomment!
 ## java -jar spongevanilla-*.jar --universe /deployments/universe/ <<< "stop"
 
+mkdir /deployments/mods/
+mkdir /deployments/config/
+
 # https://github.com/vorburger/s2i-minecraft-server/issues/2
 find /deployments/ -exec chmod a+rw {} \;
