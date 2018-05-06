@@ -5,7 +5,7 @@ set -ex
 id
 
 # Copy server.properties & Co.
-find /tmp/src/src/ -type f -exec cp -v {} /deployments \;
+cp -vR /tmp/src/src/* /deployments/
 
 # Download Minecraft & Sponge JARs
 MINECRAFT_VERSION=1.12.2
