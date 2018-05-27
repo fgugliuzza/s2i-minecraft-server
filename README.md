@@ -2,7 +2,7 @@
 
 ## OpenShift (incl. minishift)
 
-Create a project named e.g. `test` on the web console (NOT using `oc new-project test`), and:
+Create a project named e.g. `test` (on the web console or using `oc new-project test`), and:
 
     oc project test
 
@@ -18,7 +18,7 @@ If you have `git clone https://github.com/vorburger/s2i-minecraft-server.git` lo
 
     oc start-build s2i-minecraft-server --from-dir=. --follow
 
-Use the UI to Add Storage (PV) for /deployments/persistent/universe to the Deployment (Application).
+Use the UI to Add Storage (PV) for /deployments/persistent/ to the Deployment (Application).
 [There is no CLI yet to add a PVC](https://github.com/kubernetes/kubernetes/pull/52006),
 but we could use [Templates](https://docs.openshift.org/latest/dev_guide/templates.html)
 to set up the PV based on a parameter (and also set memory and CPU resource limits, and healthcheck).
@@ -61,7 +61,7 @@ Run it with with an ephemeral world for a first quick test:
 or with a persistent world on a volume (NB -v not --mount, even for volumes):
 
     docker volume create test-universe
-    docker run --rm -p 25565:25565 -v test-universe:/deployments/persistent/universe s2i-minecraft-server
+    docker run --rm -p 25565:25565 -v test-universe:/deployments/persistent/ s2i-minecraft-server
 
     docker volume inspect test-universe
     docker volume ls
