@@ -18,7 +18,7 @@ cd /tmp
 curl -S -L -J -f -O https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
 mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
 
-curl -S -L -J -f -O https://s3.amazonaws.com/Minecraft.Download/versions/$MINECRAFT_VERSION/minecraft_server.$MINECRAFT_VERSION.jar
+curl -S -L -J -f -O https://github.com/OASIS-learn-study/swissarmyknife-minecraft-server-binaries/raw/master/minecraft_server.$MINECRAFT_VERSION.jar
 mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
 
 cd /deployments/
