@@ -9,7 +9,7 @@ cp -vR /tmp/src/src/* /deployments/
 
 # Download Minecraft & Sponge JARs
 MINECRAFT_VERSION=1.12.2
-SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
+SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.5
 
 # must cd into a writeable directory for curl to work, because it seems to write something into current directory, even with another given output dir
 # see https://github.com/OASIS-learn-study/s2i-minecraft-server/issues/7
