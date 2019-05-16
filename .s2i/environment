@@ -2,7 +2,7 @@ JAVA_APP_DIR=/deployments/
 
 # TODO https://github.com/fabric8io-images/s2i/issues/123 and then:
 # JAVA_APP_JAR=spongevanilla*.jar
-JAVA_APP_JAR=spongevanilla-1.12.2-7.1.0-BETA-33.jar
+JAVA_APP_JAR=spongevanilla-1.12.2-7.1.5.jar
 
 JAVA_ARGS=--universe /deployments/persistent/universe/
 
