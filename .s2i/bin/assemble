@@ -8,18 +8,30 @@ id
 cp -vR /tmp/src/src/* /deployments/
 
 # Download Minecraft & Sponge JARs
-MINECRAFT_VERSION=1.12.2
-SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
+#MINECRAFT_VERSION=1.12.2
+#SPONGEVANILLA_VERSION=$MINECRAFT_VERSION-7.1.0-BETA-33
 
 # must cd into a writeable directory for curl to work, because it seems to write something into current directory, even with another given output dir
 # see https://github.com/OASIS-learn-study/s2i-minecraft-server/issues/7
 cd /tmp
 
-curl -S -L -J -f -O https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
-mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
+#curl -S -L -J -f -O https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/$SPONGEVANILLA_VERSION/spongevanilla-$SPONGEVANILLA_VERSION.jar
+#mv spongevanilla-$SPONGEVANILLA_VERSION.jar /deployments/
 
-curl -S -L -J -f -O https://github.com/OASIS-learn-study/swissarmyknife-minecraft-server-binaries/raw/master/minecraft_server.$MINECRAFT_VERSION.jar
-mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
+#curl -S -L -J -f -O https://github.com/OASIS-learn-study/swissarmyknife-minecraft-server-binaries/raw/master/minecraft_server.$MINECRAFT_VERSION.jar
+#mv minecraft_server.$MINECRAFT_VERSION.jar /deployments/
+
+
+
+
+
+# minecraft_server.1.14.4.jar
+curl -S -L -J -f -O https://launcher.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar
+mv server.jar /deployments/
+
+
+
+
 
 cd /deployments/
 
